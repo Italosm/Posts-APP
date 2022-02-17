@@ -14,6 +14,7 @@ class Home extends Component {
     page: 0,
     postsPerPage: 6,
     searchValue: "",
+    loadedPosts: false,
   };
 
   async componentDidMount() {
@@ -28,6 +29,7 @@ class Home extends Component {
     this.setState({
       posts: postsAndPhotos.slice(page, postsPerPage),
       allPosts: postsAndPhotos,
+      loadedPosts: true,
     });
   };
 
@@ -46,7 +48,7 @@ class Home extends Component {
   };
 
   render() {
-    const { posts, page, postsPerPage, allPosts, searchValue } = this.state;
+    const { posts, page, postsPerPage, allPosts, searchValue, loadedPosts } = this.state;
     const noMorePosts = page + postsPerPage >= allPosts.length;
 
     const filteredPosts = !!searchValue
@@ -67,7 +69,7 @@ class Home extends Component {
           />
         </div>
         {filteredPosts.length > 0 && <Posts posts={filteredPosts} />}
-        {filteredPosts.length === 0 && (
+        {(loadedPosts === true && filteredPosts.length === 0) && (
           <div>
             <p>Not Found</p>
             <Posts posts={posts} />
