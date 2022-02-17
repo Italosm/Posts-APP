@@ -72,7 +72,7 @@ class Home extends Component {
         {(loadedPosts === true && filteredPosts.length === 0) && (
           <div>
             <p>Not Found</p>
-            <Posts posts={posts} />
+            {/*<Posts posts={posts} />*/}
           </div>
         )}
         <div className="button-container">
